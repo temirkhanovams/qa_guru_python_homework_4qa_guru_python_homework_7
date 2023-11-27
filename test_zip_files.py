@@ -3,13 +3,7 @@ import zipfile
 import openpyxl
 import xlrd
 from utils import *
-import requests
 from pypdf import PdfReader
-from selene import query
-from selene.support.shared import browser
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 def test_names_of_files():
@@ -48,10 +42,8 @@ def test_xlsx():
     file_name = "file_example_XLSX_50.xlsx"
     book_in_resources = openpyxl.load_workbook(os.path.join(path_resources, file_name))
     sheet_in_resources = book_in_resources.active
-    mylist = list(sheet_in_resources.iter_rows(max_row=1, values_only=True))
     with zipfile.ZipFile(path_tmp_zip) as zf:
         book_in_zip = openpyxl.load_workbook(zf.open(file_name))
-        sheet_in_zip = book_in_zip.active
         assert book_in_zip.sheetnames == book_in_resources.sheetnames
 
 
