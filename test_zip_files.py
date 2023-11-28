@@ -41,7 +41,6 @@ def test_xls():
 def test_xlsx():
     file_name = "file_example_XLSX_50.xlsx"
     book_in_resources = openpyxl.load_workbook(os.path.join(path_resources, file_name))
-    sheet_in_resources = book_in_resources.active
     with zipfile.ZipFile(path_tmp_zip) as zf:
         book_in_zip = openpyxl.load_workbook(zf.open(file_name))
         assert book_in_zip.sheetnames == book_in_resources.sheetnames
